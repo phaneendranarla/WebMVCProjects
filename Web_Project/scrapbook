@@ -1,0 +1,45 @@
+create table TBL_Patient_1430870
+(
+	PatientId number(8) primary key,
+	PatientName varchar(50) not null,
+	PatientStatus varchar(25),
+	PatientInvestigation varchar(100),
+	PatientAddress varchar(50) not null, check (PatientStatus = 'Admitted' or PatientStatus = 'Discharged' or PatientStatus = 'Bill in Progress')
+)
+
+select * from TBL_Patient_1430870
+
+
+create table TBL_Doctor_1430870
+(
+	
+	DoctorId number(8) primary key,
+	DoctorName varchar(25) not null,
+	DoctorSpecialization varchar(25) not null,
+	DocExperience number(2), check (DocExperience>3)
+	
+)
+
+select * from TBL_Doctor_1430870
+
+alter table TBL_Patient_1430870 add DoctorId number(8) references TBL_Doctor_1430870(DoctorId) 
+
+insert into TBL_Patient_1430870 values(10,'Shyam','Admitted',null,'Banglore',100)
+insert into TBL_Patient_1430870 values(11,'Ram','Bill in Progress','Diagnosed with Leukemia','Chennai',101)
+insert into TBL_Patient_1430870 values(12,'Neetha','Discharged','Diagnosed with URI','Mumbai',102)
+insert into TBL_Patient_1430870 values(13,'Nakul','Admitted',null,'Hyderabad',103)
+
+
+insert into TBL_Doctor_1430870 values(100,'Babu','Cardiac',4)
+insert into TBL_Doctor_1430870 values(101,'Ragh','Ortho',4)
+insert into TBL_Doctor_1430870 values(102,'Madhu','Neuro',4)
+insert into TBL_Doctor_1430870 values(103,'Sindhu','GeneralMedicine',4)
+
+select from TBL_Patient_1430870.PatientId,TBL_Patient_1430870.PatientName,TBL_Patient_1430870.PatientStatus,TBL_Patient_1430870.PatientInvestigation,TBL_Doctor_1430870.DoctorId,TBL_Doctor_1430870.DoctorName,TBL_Doctor_1430870.DoctorSpecialization from TBL_Patient_1430870 inner join TBL_Doctor_1430870 on TBL_Patient_1430870.DoctorID = TBL_Doctor_1430870.DoctorID where TBL_Patient_1430870.PatientId=10  
+
+
+insert into TBL_Patient_1430870 values(14,'Akhil','Admitted',null,'Hyderabad',104)
+insert into TBL_Patient_1430870 values(15,'JaiPal','Discharged','Diagnosed with Diabetis','Hyderabad',105)
+
+insert into TBL_Doctor_1430870 values(104,'Anil','GeneralMedicine',4)
+insert into TBL_Doctor_1430870 values(105,'Venu','GeneralMedicine',4)
